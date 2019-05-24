@@ -3,7 +3,8 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         mapTypeControl: false,
         center: { lat: 33.472113, lng: -88.791291 },
-        zoom: 16
+        zoom: 16,
+        fullscreenControl: false
     });
 
     var redCoords = [
@@ -32,8 +33,10 @@ function initMap() {
 
     //LOADS SEARCH BOX
     var input = document.getElementById('pac-input');
+    var extra = document.getElementById('extra');
     var searchBox = new google.maps.places.SearchBox(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(extra);
 
     // SUGGESTS RESULTS AROUND VIEWPORT
     map.addListener('bounds_changed', function () {
@@ -62,63 +65,13 @@ function initMap() {
         if (poly.checked) {
             places.forEach(function (place) {
                 if (google.maps.geometry.poly.containsLocation(place.geometry.location, redPoly)) {
-                    if (!place.geometry) {
-                        console.log("Returned place contains no geometry");
-                        return;
-                    }
-                    var icon = {
-                        url: place.icon,
-                        size: new google.maps.Size(71, 71),
-                        origin: new google.maps.Point(0, 0),
-                        anchor: new google.maps.Point(17, 34),
-                        scaledSize: new google.maps.Size(25, 25)
-                    };
-
-                    // CREATES A MARKER FOR EACH TYPE
-                    markers.push(new google.maps.Marker({
-                        map: map,
-                        icon: icon,
-                        title: place.name,
-                        position: place.geometry.location
-                    }));
-
-                    if (place.geometry.viewport) {
-                        bounds.union(place.geometry.viewport);
-                    } else {
-                        bounds.extend(place.geometry.location);
-                    }
-                    map.fitBounds(bounds);
+                    polywoly(place, bounds, map, markers)
                 }
             });
         }
         else {
             places.forEach(function (place) {
-                if (!place.geometry) {
-                    console.log("Returned place contains no geometry");
-                    return;
-                }
-                var icon = {
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25)
-                };
-
-                // CREATES A MARKER FOR EACH TYPE
-                markers.push(new google.maps.Marker({
-                    map: map,
-                    icon: icon,
-                    title: place.name,
-                    position: place.geometry.location
-                }));
-
-                if (place.geometry.viewport) {
-                    bounds.union(place.geometry.viewport);
-                } else {
-                    bounds.extend(place.geometry.location);
-                }
-                map.fitBounds(bounds);
+                polywoly(place, bounds, map, markers)
             });
         }
 
@@ -302,4 +255,32 @@ function logClear() {
 
 function hideLogs() {
     document.getElementById("logs").style.display = "none";
+}
+function polywoly(place, bounds, map, markers) {
+    if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+    }
+    var icon = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+    };
+
+    // CREATES A MARKER FOR EACH TYPE
+    markers.push(new google.maps.Marker({
+        map: map,
+        icon: icon,
+        title: place.name,
+        position: place.geometry.location
+    }));
+
+    if (place.geometry.viewport) {
+        bounds.union(place.geometry.viewport);
+    } else {
+        bounds.extend(place.geometry.location);
+    }
+    map.fitBounds(bounds);
 }

@@ -10,20 +10,21 @@
 
 <body>
 
-
-    <div id="logs" style="display:inherit">
-        <p id="logsText"></p>
+    <div id="extra" style="display:inherit">
+        <div id="logs" style="display:inherit">
+            <p id="logsText"></p>
+        </div>
+        <div id="log_buttons">
+            <button class="button" name="clear_log" onclick="logClear()">Clear Logs</button>
+            <button class="button" name="show_log" onclick="showLogs()">Show Logs</button>
+            <button class="button" name="hide_log" onclick="hideLogs()">Hide Logs</button>
+        </div>
+        <div id="search_type">
+            <input type="checkbox" name="poly" id="changesearch_poly">
+            <label for="changemode-walking">Polygon</label>
+        </div>
     </div>
 
-    <div id="log_buttons">
-        <button name="clear_log" onclick="logClear()">Clear Logs</button>
-        <button name="show_log" onclick="showLogs()">Show Logs</button>
-        <button name="hide_log" onclick="hideLogs()">Hide Logs</button>
-    </div>
-    <div id="search_type">
-        <input type="checkbox" name="poly" id="changesearch_poly">
-        <label for="changemode-walking">Polygon</label>
-    </div>
 
 
 
@@ -58,7 +59,7 @@
         <label for="changemode-driving">Driving</label>
 
     </div>
-    <div id="arrivalTime">
+    <div id="arrivalTime" class="controls">
         <p id="time"></p>
     </div>
 
@@ -66,7 +67,7 @@
 
     <script src="scripts/init_map.js"></script>
     <!-- Replace the value of the key parameter with your own API key. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_-rLv2q7zWmXmc2bvexdasgnL9_pTjZE&libraries=geometry&libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR3ixLXQ5GrzZ4GPXCXmKSdS96VaF3VVE&libraries=geometry&libraries=places&callback=initMap"
             async defer></script>
 
 

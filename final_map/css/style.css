@@ -8,6 +8,16 @@ html, body {
     padding: 0;
 }
 
+.button {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+}
+
+    .button:hover {
+        background-color: #e7e7e7;
+    }
+
 .controls {
     margin-top: 10px;
     border: 1px solid transparent;
@@ -35,6 +45,20 @@ html, body {
     #destination-input:focus {
         border-color: #4d90fe;
     }
+
+#extra {
+    color: #fff;
+    background-color: #4d90fe;
+    margin-left: 12px;
+    padding: 5px 11px 0px 11px;
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
 
 #mode-selector {
     color: #fff;
